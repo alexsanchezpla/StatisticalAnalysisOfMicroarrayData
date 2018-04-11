@@ -87,16 +87,15 @@ Below is presented a list and a short description of all the packages that have 
 + __pd.mogene.2.1.st__: It is an annotation package for the array used in this experiment. @pdmogene
 + __Biobase__: This package contains standardized data structures to represent genomic data that are used by other R packages. @biobase
 + __Array Quality Metrics__: This package generates microarray quality metrics reports for microarray data. @AQM
++ __gplots__: Various R programming tools for plotting data. @gplots
 + __ggplot2__: This package is a plotting system for R. We will use it to build nice graphs @ggplot2
 + __ggrepel__: This is also a graphic package for R, and with it we will avoid overlapping of labels in plots @ggrepel
 + __pvca__: This package contains the functions necessary to assess the batch effect sources involved in a microarray experiment @pvca
 + __limma__: Limma is an R package for the analysis of gene expression microarray data, especially the use of linear models for analyzing designed experiments and the assessment of differential expression. @Smyth2005
 + __genefilter__: The genefilter package can be used to filter (select) genes from a microarray dataset according to a variety of different filtering mechanisms. @genefilter
-+ __xtable__: A R package to print tables in html format. @xtable
 + __annotate__: An R package for managing annotations that is, providing functions to extract information from annotation packages, which are essentially databases containing information about genes and related features. @anotate
 + __org.Mm.eg.db__: Annotation package for mouse. Contains multiple SQL tables relating gene information from mouse with different databases. The main key for all tables is the Entrez Gene identifier, a unique integer number for every gene in every organism. There are multiple organism-centric annotation packages named as: "org.XX.eg.db". Each package  provides information on organism "XX"", indexed by the Entrez Gene  identifiers, "eg", of this organism. @orgMm
 + __mogene21sttranscriptcluster.db__: Platform-centric annotation package. Instead of providing information using the Entrez Gene identifiers these databases use the specific c identifiers of (at the probeset or transcript level) of a given type of array as indexes to link to other databases. @mogene21 
-+ __gplots__: Various R programming tools for plotting data. @gplots
 + __ReactomePA__: an R/Bioconductor package providing enrichment analyses, including hypergeometric test and gene set enrichment analyses. @Yu2016
 
 ## Methods
@@ -154,16 +153,16 @@ if (!require(oligo)) biocLite("oligo") else detach(package:oligo)
 if (!require(pd.mogene.2.1.st)) biocLite("pd.mogene.2.1.st") else detach(package:pd.mogene.2.1.st)
 if (!require(arrayQualityMetrics)) biocLite("arrayQualityMetrics") else detach(package:arrayQualityMetrics)
 if (!require(colorspace)) install.packages("colorspace") else detach(package:colorspace)
+if (!require(gplots)) install.packages("gplots") else detach(package:gplots)
 if (!require(ggplot2)) install.packages("ggplot2") else detach(package:ggplot2)
 if (!require(ggrepel)) install.packages("ggrepel") else detach(package:ggrepel)
 if (!require(limma)) biocLite("limma") else detach(package:limma)
 if (!require(genefilter)) biocLite("genefilter") else detach(package:genefilter)
-if (!require(xtable)) install.packages("xtable") else detach(package:xtable)
+if (!require(pvca)) biocLite("pvca") else detach(package:pvca)
 if (!require(mogene21sttranscriptcluster.db)) biocLite("mogene21sttranscriptcluster.db")else detach(package:mogene21sttranscriptcluster.db)
 if (!require(annotate)) biocLite("annotate") else detach(package:annotate)
 if (!require(org.Mm.eg.db)) biocLite("org.Mm.eg.db") else detach(package:org.Mm.eg.db)
 if (!require(ReactomePA)) biocLite("ReactomePA") else detach(package:ReactomePA)
-if (!require(gplots)) install.packages("gplots") else detach(package:gplots)
 ```
 
 5. __Read the CEL files__
