@@ -1,0 +1,23 @@
+File	Category	Order	Description
+targets.csv	DATA	1	Sample groups, labels and covariates information file
+normalized.Data.csv	DATA	2	Normalized expression values for all genes (or transcripts, or probesets)
+normalized.Filtered.Data.csv	DATA	3	Normalized expression values for genes (or transcripts, or probesets)
+BoxplotRaw.pdf	QC	4	Intensity distribution for raw data
+BoxplotNorm.pdf	QC	5	Intensity distribution for normalized data
+PCAraw.pdf	QC	6	Principal Component Analysis plot for raw data
+PCANorm.pdf	QC	7	Principal Component Analysis plot for normalized data
+QCDir.Raw/index.html	QC	8	Quality control plots of raw data with ArrayQualityMetrics package
+QCDir.Norm/index.html	QC	9	Quality control plots of normalized data with ArrayQualityMetrics package
+SDplot.pdf	ANALYSIS	9	Standard deviation of all genes (or transcripts or probesets) in the array
+topAnnotated_KOvsCTL_COLD.csv	ANALYSIS	10	Top Table (with annotations) for the comparison: KOvsCTL in COLD temperature
+topAnnotated_KovsCTL_RT.csv	ANALYSIS	11	Top Table (with annotations) for the comparison: KOvsCTL in ROOM temperature
+topAnnotated_INT.csv	ANALYSIS	12	Top Table (with annotations) for the comparison between comparions: INT
+Volcanos.pdf	ANALYSIS	13	Volcano plot for the comparisons performed
+HeatmapUnordered.pdf	ANALYSIS	14	Heatmap made from genes selected from multiple comparisons. No additional ordering of rows.
+HeatmapOrderByRows.pdf	ANALYSIS	15	Heatmap made from genes selected from multiple comparisons. Rows ordered by similarity
+ReactomePA.Results.KovsCTL.COLD.csv	SIGBIO	16	Summary of all the enriched pathways and the associated statistics for the comparison: KOvsCTL in COLD temperature
+ReactomePA.Results.KovsCTL.RT.csv	SIGBIO	17	Summary of all the enriched pathways and the associated statistics for the comparison: KOvsCTL in ROOM temperature
+ReactomePA.Barplot.KovsCTL.COLD.pdf	SIGBIO	18	Bar plot with the best enriched pathways  for the comparison: KOvsCTL in COLD temperature
+ReactomePABarplot.KovsCTL.RT.pdf	SIGBIO	19	Bar plot with the best enriched pathways  for the comparison: KOvsCTL in ROOM temperature
+ReactomePA.cnetplot.KovsCTL.COLD.pdf	SIGBIO	20	Plot with a network of the enriched pathways and the relation among the genes included for the comparison: KOvsCTL in COLD temperature
+ReactomePA.cnetplot.KovsCTL.RT.pdf	SIGBIO	21	plot with a network of the enriched pathways and the relation among the genes included for the comparison: KOvsCTL in ROOM temperature
