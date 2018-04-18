@@ -1,0 +1,15 @@
+Package name,Description,Reference
+__Oligo__,	Oligo is  a Bioconductor package  for  preprocessing  oligonucleotide  microarrays. We use this package to read the CEL files and normalize them,@oligo
+__pd.mogene.2.1.st__,  It is an annotation package for the array used in this experiment,@pdmogene
+__Biobase__ ,This package contains standardized data structures to represent genomic data that are used by other R packages,@biobase
+__arrayQualityMetrics__, This package generates microarray quality metrics reports for microarray data,@AQM
+__gplots__, Various R programming tools for plotting data,@gplots
+__ggplot2__, This package is a plotting system for R. We will use it to build nice graphs,  @ggplot2
+__ggrepel__, This package is used to avoid overlapping of labels in plots,  @ggrepel
+__pvca__ , This package contains the functions necessary to assess the batch effect sources involved in a microarray experiment,@pvca
+__limma__, Limma is an R package for the analysis of gene expression microarray data especially the use of linear models for analyzing designed experiments and the assessment of differential expression,@Smyth2005
+__genefilter__,  The genefilter package can be used to filter (select) genes from a microarray dataset according to a variety of different filtering mechanisms, @genefilter
+__annotate__,  An R package for managing annotations that is fosr providing functions to extract information from annotation packages. These are are essentially databases containing information about genes and related features,  @anotate
+__org.Mm.eg.db__,  Annotation package for mouse. Contains multiple SQL tables relating gene information from mouse with different databases. The main key for all tables is the Entrez Gene identifier a unique integer number for every gene in every organism. There are multiple organism-centric annotation packages named as: "org.XX.eg.db". Each package  provides information on organism "XX" indexed by the Entrez Gene  identifiers ("eg") of this organism, @orgMm
+__mogene21sttranscriptcluster.db__, Platform-centric annotation package. Instead of providing information using the Entrez Gene identifiers these databases use the specific c identifiers of (at the probeset or transcript level) of a given type of array as indexes to link to other databases,  @mogene21 
+__ReactomePA__, an R/Bioconductor package providing enrichment analyses including hypergeometric test and gene set enrichment analyses, @Yu2016
