@@ -45,7 +45,7 @@ Microarrays, Bioconductor, R, Differential Expression
 
 Microarray data analysis is one of the clearest cases where interaction between bioinformatics and statistics has been  highly beneficial for both disciplines. Efron @Efron2013 even calls the 21st century as the century of microarrays. 
 
-What is generically described as "microarray data analysis" is a process that starts with the design of the experiment intended to answer with one or more biological questions and ends with a temptative answer for these questions. Statistics is involved at every step of this process, for preparing, transforming visualizing or analyzing data. And, of course, every step can be done in different way that use either classical statistics or new methods developed ad-hoc for these often high dimensional problems. The detailed description of these steps is out of the scope of this chapter and the reader is assumed to be familiar with them. It is assumed that the reader is already familiar with microarrays such as they are introduced in @Sanchez-Pla2014 and also with the general ideas of microarray data analysis such as can be found in @Draghici2012. In any case, for the sake of completeness basic ideas will be briefly introduced and citations provided the first time they are discussed.
+What is generically described as "microarray data analysis" is a process that starts with the design of the experiment intended to answer with one or more biological questions and ends with a tentative answer for these questions. Statistics is involved at every step of this process, for preparing, transforming visualizing or analyzing data. And, of course, every step can be done in different way that use either classical statistics or new methods developed ad-hoc for these often high dimensional problems. The detailed description of these steps is out of the scope of this chapter and the reader is assumed to be familiar with them. It is assumed that the reader is already familiar with microarrays such as they are introduced in @Sanchez-Pla2014 and also with the general ideas of microarray data analysis such as can be found in @Draghici2012. In any case, for the sake of completeness basic ideas will be briefly introduced and citations provided the first time they are discussed.
 
 For our objectives we can assume that a microarray dataset is a matrix of continuous values that represent the expressions of a set of genes (one gene per row), in a variety of conditions or samples (one sample per column). See figure \@ref(fig:dataset) for an example.
 
@@ -168,17 +168,17 @@ install.packages("colorspace")
 install.packages("gplots")
 install.packages("ggplot2")
 install.packages("ggrepel")
-source("http://bioconductor.org/biocLite.R")
-biocLite("oligo")
-biocLite("pd.mogene.2.1.st")
-biocLite("arrayQualityMetrics")
-biocLite("limma")
-biocLite("genefilter")
-biocLite("pvca")
-biocLite("mogene21sttranscriptcluster.db")
-biocLite("annotate")
-biocLite("org.Mm.eg.db")
-biocLite("ReactomePA")
+install.packages("BiocManager")
+BiocManager::install("oligo")
+BiocManager::install("pd.mogene.2.1.st")
+BiocManager::install("arrayQualityMetrics")
+BiocManager::install("limma")
+BiocManager::install("genefilter")
+BiocManager::install("pvca")
+BiocManager::install("mogene21sttranscriptcluster.db")
+BiocManager::install("annotate")
+BiocManager::install("org.Mm.eg.db")
+BiocManager::install("ReactomePA")
 ```
 
 ## 2.4  __Read the CEL files__
