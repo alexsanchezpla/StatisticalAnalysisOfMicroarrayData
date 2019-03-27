@@ -1,7 +1,7 @@
 ---
 title: "Statistical Analysis of Microarray Data"
-author: "Ricardo Gonzalo Sanz and Alex Sanchez Pla"
-date: "April 2018"
+author: "Ricardo Gonzalo Sanz and Alex Sanchez-Pla"
+date: "April 2019"
 output:
   bookdown::word_document2:
     fig_caption: yes
@@ -607,13 +607,13 @@ knitr::kable(
 
 ## 2.17 __Visualizing differential expression__
 
-A visualization of the overall differential expression can be obtained using volcano-plots. These plots show if there are many or few genes with a large fold-change and significantly expressed or if this number is low. These graphs represent in the X-axis the changes of expression in logarithmic scale ("biological effect") and in the Y-axis the "minus logarithm" of the p-value or alternatively the `B` statistic ("Statistical effect"). Figure \@ref(fig:volcanoPlot) shows a volcano plot for the comparison between KO and WT in COLD temperature. The names of the top 10 genes (i.e. the first ten genes in the topTable) are shown in the plot.
+A visualization of the overall differential expression can be obtained using volcano-plots. These plots show if there are many or few genes with a large fold-change and significantly expressed or if this number is low. These graphs represent in the X-axis the changes of expression in logarithmic scale ("biological effect") and in the Y-axis the "minus logarithm" of the p-value or alternatively the `B` statistic ("Statistical effect"). Figure \@ref(fig:volcanoPlot) shows a volcano plot for the comparison between KO and WT in COLD temperature. The names of the top 4 genes (i.e. the first four genes in the topTable) are shown in the plot.
 
-```{r volcanoPlot, fig.cap="Volcano plot for the comparison between KO and WT in COLD temperature. The names of the top 10 genes (i.e. the first ten genes in the topTable) are shown in the plot"}
+```{r volcanoPlot, fig.cap="Volcano plot for the comparison between KO and WT in COLD temperature. The names of the top 4 genes (i.e. the first ten genes in the topTable) are shown in the plot"}
 require(mogene21sttranscriptcluster.db)
 geneSymbols <- select(mogene21sttranscriptcluster.db, rownames(fit.main), c("SYMBOL"))
 SYMBOLS<- geneSymbols$SYMBOL
-volcanoplot(fit.main, coef=1, highlight=10, names=SYMBOLS, 
+volcanoplot(fit.main, coef=1, highlight=4, names=SYMBOLS, 
             main=paste("Differentially expressed genes", colnames(cont.matrix)[1], sep="\n"))
   abline(v=c(-1,1))
 
@@ -621,15 +621,15 @@ volcanoplot(fit.main, coef=1, highlight=10, names=SYMBOLS,
 
 ```{r saveVolcanos, echo=FALSE, results='hide'}
 tiff("figures/VolcanoPlot.tiff", res = 150, width = 5, height = 5, units = 'in')
-volcanoplot(fit.main, coef=1, highlight=10, names=SYMBOLS, 
-            main=paste("Differentially expressed genes", colnames(cont.matrix)[1], sep="\n"))
-  abline(v=c(-1,1))
+volcanoplot(fit.main, coef=1, highlight=4, names=SYMBOLS, 
+            main=paste("Differentially expressed genes", colnames(cont.matrix)[1], sep="\n")) 
+abline(v=c(-1,1))
 
 dev.off()
 
 pdf("figures/Volcanos.pdf")
 for (i in colnames(cont.matrix)){
-  volcanoplot(fit.main, coef=i, highlight=10, names=SYMBOLS,
+  volcanoplot(fit.main, coef=i, highlight=4, names=SYMBOLS,
               main=paste("Differentially expressed genes",i, sep="\n"))
   abline(v=c(-1,1))
 }
@@ -813,9 +813,12 @@ sapply(listOfSelected, length)
 ```
 
 The analysis also requires to have the Entrez Identifiers for all genes analyzed.
+It is an open discussion if what one should use is "all genes analyzed" -that is genes that have been retained in the analysis and are part of the "topTable"- or all genes available. In this case we use the second option and define our universe to be all genes that have at least one annotation in the Gene Ontology
 
 ```{r}
-EntrezUni <- topAnnotated_KOvsWT.COLD$ENTREZID
+mapped_genes2GO <- mappedkeys(org.Mm.egGO)
+mapped_genes2KEGG <- mappedkeys(org.Mm.egPATH)
+mapped_genes <- union(mapped_genes2GO , mapped_genes2KEGG)
 ```
 
 The Biological significance analysis will be applied only to the first two lists. Sometimes yet another decomposition is applied so that up and downregulated genes are separately analyzed. This will not be done here because there is no clear biological argument to proceed so in all cases.
@@ -825,23 +828,22 @@ require(ReactomePA)
 
 listOfData <- listOfSelected[1:2]
 comparisonsNames <- names(listOfData)
-
-organisme <- "mouse"
-universe <- as.character(EntrezUni)
+universe <- mapped_genes
 
 for (i in 1:length(listOfData)){
-  data <- listOfData[[i]]
-  genesIn <- listOfSelected[[i]]
+  genesIn <- listOfData[[i]]
   comparison <- comparisonsNames[i]
   enrich.result <- enrichPathway(gene = genesIn,
                                  pvalueCutoff = 0.05,
                                  readable = T,
-                                 organism =  organisme,
-                                 universe = universe,
-                                 minGSSize = 5,
-                                 maxGSSize = 500,
-                                 pAdjustMethod = "BH")
+                                 pAdjustMethod = "BH",
+                                 organism = "mouse",
+                                 universe = universe)
   
+  cat("##################################")
+  cat("\nComparison: ", comparison,"\n")
+  print(head(enrich.result))
+
   if (length(rownames(enrich.result@result)) != 0) {
   write.csv(as.data.frame(enrich.result), 
              file =paste0("./results/","ReactomePA.Results.",comparison,".csv"), 
@@ -865,6 +867,13 @@ The results obtained in the analysis of biological significance are:
   - a _.csv_ file with a summary of all the enriched pathways and the associated statistics. 
   - a bar plot with the best enriched pathways. Height of the bar plot is the number of genes of our analysis related with that pathway. Moreover, pathways are  ordered by statistical significance.
   - a plot with a network of the enriched pathways and the relation among the genes included.
+  
+  Figure \@ref(fig:network) shows the network produced from the genes selected in the comparison 
+
+```{r network}
+  cnetplot(enrich.result, categorySize = "geneNum", schowCategory = 15, 
+         vertex.label.cex = 0.75)
+```
 
 In our study for comparison _KOvsWT.COLD_ only a single enriched pathway has been found, _Synthesis of very long-chain fatty acyl-CoAs_, and in comparison _KOvsCTL.RT_, four enriched pathways have been found (Table \@ref(tab:tableReacto)). The more statistically relevant is _Inositol phosphate metabolism_.
 
